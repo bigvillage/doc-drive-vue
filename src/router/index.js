@@ -58,22 +58,22 @@ const routes = [
   }
 ]
 
-router.beforeEach(async (to, from, next) => {
-  const authStore = useAuthStore()
+// router.beforeEach(async (to, from, next) => {
+//   const authStore = useAuthStore()
 
-  // 로그인 필요 없는 페이지
-  const publicPages = ['/login', '/signup']
-  const isPublic = publicPages.includes(to.path)
+//   // 로그인 필요 없는 페이지
+//   const publicPages = ['/login', '/signup']
+//   const isPublic = publicPages.includes(to.path)
 
-  // 서버에 로그인 상태 확인 (쿠키 기반)
-  const isLoggedIn = await authStore.checkAuth()
+//   // 서버에 로그인 상태 확인 (쿠키 기반)
+//   const isLoggedIn = await authStore.checkAuth()
 
-  if (!isPublic && !isLoggedIn) {
-    return next('/login')
-  }
+//   if (!isPublic && !isLoggedIn) {
+//     return next('/login')
+//   }
 
-  next()
-})
+//   next()
+// })
 
 const router = createRouter({
   history: createWebHistory(),
