@@ -107,9 +107,10 @@ const handleSignup = async () => {
     console.log("{ ...form } ==> ", { ...form });
     console.log("authStore ==> ", authStore);
     const result = await authStore.signup({ ...form })
+    console.log("result ==> ", result);
 
-    if (result.success) {
-        alert('회원가입이 완료되었습니다!')
+    if (result.result) {
+        alert(result.message)
         router.push('/login')
     } else {
         alert(result.message)

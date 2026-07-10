@@ -3,7 +3,7 @@
         <SearchBar />
 
         <div class="user-menu">
-            <template v-if="true">
+            <template v-if="authStore.user">
                 <div class="user-actions">
                     <button @click="router.push('/mypage')" class="nav-link">마이페이지</button>
                     <button @click="router.push('/settings')" class="nav-link">설정</button>

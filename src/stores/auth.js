@@ -23,8 +23,10 @@ export const useAuthStore = defineStore('auth', () => {
         isSignup: true 
       });
       if (response.data.result) {
-        user.value = response.data.data; 
-        return { result: true };
+        user.value = {
+          name: response.data.name,
+          email: response.data.email
+        };
       }
     } catch (err) {
       error.value = err.response?.data?.message || '회원가입 중 오류가 발생했습니다.';
@@ -40,9 +42,13 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null;
     try {
       const response = await axios.post(API_BASE_URL, payload);
-      
+      console.log("response => ", response);
       if (response.data.result) {
-        user.value = response.data.data;
+        // user.value = {
+        //   name: response.data.name,
+        //   email: response.data.email
+        // };
+        user.value = response.data.user;
         return { success: true };
       } else {
         return { success: false, message: response.data.message };
@@ -71,14 +77,15 @@ export const useAuthStore = defineStore('auth', () => {
   const checkAuth = async () => {
     try {
       const response = await axios.get(API_BASE_URL);
-      
+      console.log("checkAuth response =", response.data);
       if (response.data.result) {
-        user.value = response.data.data.user;
+        user.value = response.data.user;
         return true;
-      } else {
-        user.value = null;
-        return false;
-      }
+      } 
+
+      user.value = null;
+      return false;
+
     } catch (err) {
       user.value = null;
       return false;
