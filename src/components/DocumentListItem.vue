@@ -2,14 +2,18 @@
     <div class="document-item-wrapper">
         <div class="list-item" @click="showModal = true">
             <div class="info-side">
-
-                <el-icon class="favorite-icon" :class="{ active: document.isFavorite }"
-                    @click.stop="handleFavoriteClick">
+                <el-icon
+                    class="favorite-icon"
+                    :class="{ active: document.isFavorite }"
+                    @click.stop="handleFavoriteClick"
+                >
                     <component :is="document.isFavorite ? StarFilled : Star" />
                 </el-icon>
 
-                <img :src="`/src/assets/icons/icon_${document.attachments[0]?.ext?.toLowerCase()}.png`"
-                    class="file-icon" />
+                <img
+                    :src="`/src/assets/icons/icon_${document.attachments[0]?.ext?.toLowerCase()}.png`"
+                    class="file-icon"
+                />
 
                 <div class="text-group">
                     <h3 class="title">{{ document.title }}</h3>
@@ -30,9 +34,7 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="edit">수정</el-dropdown-item>
-                            <el-dropdown-item command="delete" divided>
-                                삭제
-                            </el-dropdown-item>
+                            <el-dropdown-item command="delete" divided> 삭제 </el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -49,7 +51,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { MoreFilled, Star, StarFilled } from '@element-plus/icons-vue' // ⭐ 추가
+import { MoreFilled, Star, StarFilled } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import DocumentDetail from './DocumentDetail.vue'
 import EditList from './EditList.vue'
@@ -61,13 +63,13 @@ const props = defineProps({
     document: {
         type: Object,
         default: () => ({
-            attachments: []
-        })
+            attachments: [],
+        }),
     },
     isFavoritePage: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 })
 
 const uploadStore = useUploadStore()
@@ -81,7 +83,7 @@ const showEditModal = ref(false)
 const downloadFile = (file) => {
     console.log(111)
     window.open(
-        `http://localhost:3000/api/documents/list/download?url=${encodeURIComponent(file.url)}&name=${file.name}`
+        `http://localhost:3000/api/documents/list/download?url=${encodeURIComponent(file.url)}&name=${file.name}`,
     )
 }
 
@@ -107,21 +109,16 @@ const handleCommand = async (command) => {
 
     if (command === 'delete') {
         try {
-            await ElMessageBox.confirm(
-                '정말 삭제하시겠습니까?',
-                '삭제 확인',
-                {
-                    confirmButtonText: '삭제',
-                    cancelButtonText: '취소',
-                    type: 'warning',
-                }
-            )
+            await ElMessageBox.confirm('정말 삭제하시겠습니까?', '삭제 확인', {
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소',
+                type: 'warning',
+            })
 
             await uploadStore.deleteDocument(props.document.id)
             await listStore.fetchDocuments()
 
             ElMessage.success('삭제 완료')
-
         } catch (e) {
             if (e !== 'cancel') {
                 console.error(e)
@@ -155,7 +152,7 @@ const handleFavoriteClick = () => {
 }
 
 .list-item:hover {
-    border-color: #409EFF;
+    border-color: #409eff;
     transform: translateX(5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }

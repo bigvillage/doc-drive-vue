@@ -1,6 +1,6 @@
 <template>
     <header class="main-header">
-        <SearchBar />
+        <!-- <SearchBar /> -->
 
         <div class="user-menu">
             <template v-if="authStore.user">
@@ -40,6 +40,10 @@ const handleLogout = async () => {
 </script>
 
 <style scoped>
+.user-menu {
+    margin-left: auto;
+}
+
 .main-header {
     display: flex;
     justify-content: space-between;

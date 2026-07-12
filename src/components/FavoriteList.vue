@@ -8,12 +8,18 @@
 
             <div class="action-group">
                 <el-button-group class="view-toggle">
-                    <el-button :type="viewMode === 'grid' ? 'primary' : ''" @click="viewMode = 'grid'">
+                    <el-button
+                        :type="viewMode === 'grid' ? 'primary' : ''"
+                        @click="viewMode = 'grid'"
+                    >
                         <el-icon>
                             <Grid />
                         </el-icon>
                     </el-button>
-                    <el-button :type="viewMode === 'list' ? 'primary' : ''" @click="viewMode = 'list'">
+                    <el-button
+                        :type="viewMode === 'list' ? 'primary' : ''"
+                        @click="viewMode = 'list'"
+                    >
                         <el-icon>
                             <List />
                         </el-icon>
@@ -22,7 +28,7 @@
 
                 <router-link to="/upload">
                     <el-button type="primary" size="large" class="upload-btn">
-                        <el-icon style="margin-right: 5px;">
+                        <el-icon style="margin-right: 5px">
                             <Plus />
                         </el-icon>
                         새 문서 업로드
@@ -33,13 +39,21 @@
 
         <div :class="viewMode === 'grid' ? 'document-grid' : 'document-list'">
             <template v-if="viewMode === 'grid'">
-                <DocumentCard v-for="doc in documents" :key="'grid-' + doc.id" :document="doc"
-                    is-favorite-page="true" />
+                <DocumentCard
+                    v-for="doc in documents"
+                    :key="'grid-' + doc.id"
+                    :document="doc"
+                    :is-favorite-page="true"
+                />
             </template>
 
             <template v-else>
-                <DocumentListItem v-for="doc in documents" :key="'list-' + doc.id" :document="doc"
-                    is-favorite-page="true" />
+                <DocumentListItem
+                    v-for="doc in documents"
+                    :key="'list-' + doc.id"
+                    :document="doc"
+                    :is-favorite-page="true"
+                />
             </template>
         </div>
 

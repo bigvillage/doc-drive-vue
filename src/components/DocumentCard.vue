@@ -51,7 +51,7 @@ const listStore = useListStore()
 const showModal = ref(false)
 
 const handleFavoriteClick = async () => {
-  const newValue = !props.document.isFavorite
+  // const newValue = !props.document.isFavorite
 
   await listStore.toggleFavorite(
     props.document.id,
@@ -59,7 +59,7 @@ const handleFavoriteClick = async () => {
     props.isFavoritePage
   )
 
-  props.document.isFavorite = newValue
+  // props.document.isFavorite = newValue
 }
 
 const downloadFile = (file) => {

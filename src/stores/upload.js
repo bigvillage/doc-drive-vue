@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+axios.defaults.withCredentials = true
 
 export const useUploadStore = defineStore('upload', () => {
   const UPLOAD_API = 'http://localhost:3000/api/documents/upload'
