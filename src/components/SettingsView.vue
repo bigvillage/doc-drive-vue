@@ -1,12 +1,16 @@
 <template>
     <div class="settings-container">
-
         <!-- 🔐 인증 화면 -->
         <div v-if="!isAuthenticated" class="auth-box">
             <h2>🔒 재인증</h2>
 
-            <el-input v-model="password" type="password" placeholder="비밀번호 입력" show-password
-                style="margin-bottom: 15px;" />
+            <el-input
+                v-model="password"
+                type="password"
+                placeholder="비밀번호 입력"
+                show-password
+                style="margin-bottom: 15px"
+            />
 
             <el-button type="primary" @click="checkAuth">확인</el-button>
         </div>
@@ -21,7 +25,6 @@
                 </template>
 
                 <el-form label-width="120px" class="form">
-
                     <el-form-item label="이름">
                         <el-input v-model="form.name" />
                     </el-form-item>
@@ -42,11 +45,9 @@
                         <el-button type="primary" @click="saveSettings">저장</el-button>
                         <el-button @click="resetSettings">초기화</el-button>
                     </el-form-item>
-
                 </el-form>
             </el-card>
         </div>
-
     </div>
 </template>
 
@@ -72,7 +73,6 @@ const checkAuth = async () => {
         } else {
             ElMessage.error(res.message)
         }
-
     } catch (e) {
         ElMessage.error('서버 오류')
     }
@@ -83,7 +83,7 @@ const form = reactive({
     name: '',
     email: '',
     darkMode: false,
-    notification: true
+    notification: true,
 })
 
 const saveSettings = () => {
@@ -99,7 +99,6 @@ const resetSettings = () => {
     ElMessage.success('초기화 완료')
 }
 
-/* 로드 */
 const saved = localStorage.getItem('settings')
 if (saved) {
     Object.assign(form, JSON.parse(saved))
